@@ -6,12 +6,19 @@ const htmlPlugin = new HtmlWebPackPlugin({
     filename: './index.html'
 })
 
-module.export = {
-    entry: path.resolve(__dirname, 'src/index.jsx'),
+module.exports = {
+    // context: path.resolve(__dirname, 'src'),
+    entry: path.resolve(__dirname, 'src/index.js'),
+    output: {
+        filename: '[name].js',
+        chunkFilename: '[name].[chunkhash].chunk.js',
+        path: __dirname + '/dist',
+        publicPath: '/'
+    },
     module: {
         rules: [
             {
-                test: /.jsx?$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: ['babel-loader']
             }
