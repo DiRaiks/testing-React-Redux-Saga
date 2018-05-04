@@ -4,7 +4,7 @@ import { middleware } from "./history";
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './saga'
 
-import rootReducer from './rootReducer';
+import rootReducer from './reducers/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 
