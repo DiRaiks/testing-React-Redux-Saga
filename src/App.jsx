@@ -18,6 +18,9 @@ class App extends Component {
             <div>
                 {this.state.title}
                 <input type="button" onClick={this.clickFunc}/>
+                {this.props.reducer.fetching
+                    ? ('LOADED')
+                    : (<img src={this.props.reducer.file} alt=""/>)}
             </div>
         )
     }
