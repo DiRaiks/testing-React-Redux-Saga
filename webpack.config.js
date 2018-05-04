@@ -8,7 +8,7 @@ const config = {
     // context: path.resolve(__dirname, 'src'),
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {
-        filename: '[name].js',
+        filename: '[name].bundle.js',
         chunkFilename: '[name].[chunkhash].chunk.js',
         path: __dirname + '/dist',
         publicPath: '/'
@@ -21,6 +21,16 @@ const config = {
                 loader: ['babel-loader']
             }
         ]
+    },
+    devServer: {
+        port: 3000,
+        host: 'localhost',
+        historyApiFallback: true,
+        noInfo: false,
+        stats: 'minimal',
+        publicPath: '/',
+        contentBase: path.join(__dirname, '/'),
+        hot: true
     },
     plugins: []
 };
