@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
     // context: path.resolve(__dirname, 'src'),
-    entry: path.resolve(__dirname, 'src/index.js'),
+    entry: ['babel-polyfill', path.resolve(__dirname, 'src/index.js')],
     output: {
         filename: '[name].bundle.js',
         chunkFilename: '[name].[chunkhash].chunk.js',

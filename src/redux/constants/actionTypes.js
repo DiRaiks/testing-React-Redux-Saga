@@ -1,3 +1,3 @@
-export const API_CALL_REQUEST = 'api_call_request';
-export const API_CALL_SUCCESS = 'api_call_success';
-export const API_CALL_FAIL = 'api_call_fail';
+export const API_CALL_REQUEST = 'API_CALL_REQUEST';
+export const API_CALL_SUCCESS = 'API_CALL_SUCCESS';
+export const API_CALL_FAIL = 'API_CALL_FAILURE';
