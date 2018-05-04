@@ -1,12 +1,10 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const htmlPlugin = new HtmlWebPackPlugin({
-    template: './src/index.html',
-    filename: './index.html'
-})
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+
+const config = {
     // context: path.resolve(__dirname, 'src'),
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {
@@ -24,7 +22,47 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        htmlPlugin
-    ]
+    plugins: []
 };
+
+// HTML Template
+// ------------------------------------
+config.plugins.push(new HtmlWebpackPlugin({
+    template: './src/index.html',
+    inject: true,
+    minify: {
+        collapseWhitespace: true,
+    },
+    filename: './index.html'
+}));
+
+// Images
+// ------------------------------------
+config.module.rules.push({
+    test    : /\.(png|jpg|gif|svg)$/,
+    loader  : 'url-loader',
+    options : {
+        limit : 8192,
+    },
+});
+
+// Styles
+// ------------------------------------
+config.plugins.push(new MiniCssExtractPlugin({
+    filename: 'styles/[name].[contenthash].css',
+    allChunks: true,
+    chunkFilename: "[id].css",
+    // disable: __DEV__,
+}));
+
+config.module.rules.push({
+    test: /\.(sass|scss)$/,
+    use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        'sass-loader',
+    ]
+});
+// config.plugins.push(extractStyles);
+
+module.exports = config;
