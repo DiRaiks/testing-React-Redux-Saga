@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
+import { middleware } from "./history";
 
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './saga'
@@ -11,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleware))
+    composeWithDevTools(applyMiddleware(sagaMiddleware, middleware))
 );
 
 sagaMiddleware.run(watcherSaga);
