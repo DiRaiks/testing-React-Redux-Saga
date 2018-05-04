@@ -9,12 +9,19 @@ class App extends Component {
         }
     }
 
+    clickFunc = () => {
+        this.props.dispatch({type: "API_CALL_REQUEST"})
+    };
+
     render() {
         return (
-            <div>{this.state.title}</div>
+            <div>
+                {this.state.title}
+                <input type="button" onClick={this.clickFunc}/>
+            </div>
         )
     }
 }
 
-const mapState = ({title}) => ({title});
+const mapState = (state) => ({...state});
 export default connect(mapState)(App);
