@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             title: 'TITLE REACT APP'
         }
@@ -15,4 +16,5 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapState = ({title}) => ({title});
+export default connect(mapState)(App);

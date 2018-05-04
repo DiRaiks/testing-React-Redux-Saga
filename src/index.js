@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
+import store from './redux/store';
+import {Provider} from 'react-redux';
 
 const MOUNT_NODE = document.getElementById('root');
 
-ReactDOM.render(<App />, MOUNT_NODE);
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    MOUNT_NODE
+);
