@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import * as actionTypes from './redux/constants/actionTypes';
 
 class App extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
     }
 
     clickFunc = () => {
-        this.props.dispatch({type: "API_CALL_REQUEST"})
+        this.props.dispatch({type: actionTypes.API_CALL_REQUEST})
     };
 
     render() {

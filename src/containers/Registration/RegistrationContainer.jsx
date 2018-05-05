@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import CustomInput from '../../components/CustomInput';
 import style from './registration.scss';
+import * as actionTypes from '../../redux/constants/actionTypes';
 
 class Registration extends Component {
     constructor(props) {
@@ -11,6 +13,18 @@ class Registration extends Component {
     inputChangeHandler = (fieldName, e) => {
         this.setState({
             [fieldName]: e.target.value
+        })
+    };
+
+    registrationHandler = () => {
+        const user = {
+            login: this.state.Login,
+            password: this.state.Password,
+            mail: this.state.Email
+        };
+        this.props.dispatch({
+            type: actionTypes.REGISTRATION_USER,
+            user
         })
     };
 
@@ -33,10 +47,10 @@ class Registration extends Component {
                         />
                     )
                 })}
-                <input type='submit' value='Done'/>
+                <input type='submit' onClick={this.registrationHandler} value='Done'/>
             </div>
         )
     }
 }
 
-export default Registration;
+export default connect()(Registration);

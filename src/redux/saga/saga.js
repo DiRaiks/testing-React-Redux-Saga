@@ -1,5 +1,5 @@
 import {takeLatest, takeEvery, call, put} from 'redux-saga/effects';
-import * as actionTypes from './constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import axios from 'axios';
 
 //watcher
