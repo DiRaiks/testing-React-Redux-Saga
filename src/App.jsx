@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class App extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
         return (
             <div>
                 {this.state.title}
+                <Link to='/registration'>Registration</Link>
                 <input type="button" onClick={this.clickFunc}/>
                 {this.props.reducer.fetching
                     ? ('LOADED')
