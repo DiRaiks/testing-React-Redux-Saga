@@ -20,6 +20,7 @@ class App extends Component {
             <div>
                 {this.state.title}
                 <Link to='/registration'>Registration</Link>
+                <Link to='/news'>NEWS</Link>
                 <input type="button" onClick={this.clickFunc}/>
                 {this.props.reducer.fetching
                     ? ('LOADED')
