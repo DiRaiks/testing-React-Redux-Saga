@@ -24,7 +24,8 @@ class Registration extends Component {
         };
         this.props.dispatch({
             type: actionTypes.REGISTRATION_USER,
-            user
+            login: this.state.Login,
+            password: this.state.Password
         })
     };
 

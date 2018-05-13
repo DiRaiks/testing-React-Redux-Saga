@@ -1,35 +1,43 @@
-import {takeLatest, takeEvery, call, put, take} from 'redux-saga/effects';
+import {takeAll, takeLatest, takeEvery, call, put, take} from 'redux-saga/effects';
 import * as actionTypes from '../constants/actionTypes';
 // import axios from 'axios';
 import {users} from '../../db';
 
-//watcher
-export function* watcherRegistrationSaga() {
-    const action = yield take(actionTypes.REGISTRATION_USER);
-    yield workerSaga(action);
-}
-
-function checkUser(action) {
-    return users.forEach(dbUser => {
-        if (dbUser.login === action.user.login) {
-            throw new Error('user already have')
+function checkUser(login, password) {
+    console.log('checkUser')
+    let newUser = false;
+    users.forEach(user => {
+        if (user.login === login) {
+            throw new Error('user already exist')
         } else {
-            return dbUser;
+            newUser = true;
         }
     })
+    if (newUser) return true;
 }
 
-function* workerSaga(action) {
+function* authorizeFunc(login, password) {
+    console.log('authorize')
     try {
-        yield checkUser(action);
-
-        yield put({
-            type: actionTypes.REGISTRATION_USER_SUCCESS
-        })
-    } catch (error) {
-        yield put({
-            type: actionTypes.REGISTRATION_USER_FAIL,
-            error
-        })
+        const success = yield call(checkUser, login, password);
+        yield put({type: actionTypes.REGISTRATION_USER_SUCCESS});
+        return success;
+    } catch(error) {
+        yield put({type: actionTypes.REGISTRATION_USER_FAIL, error});
     }
 }
+
+export function* watcherRegistrationSaga() {
+    while (true) {
+        const {login, password} = yield take(actionTypes.REGISTRATION_USER);
+        console.log('-->>>>', login, password, authorizeFunc)
+        const authorize = yield call(authorizeFunc, login, password);
+        if (authorize) {
+            yield take('LOGOUT')
+        }
+    }
+}
+
+
+
+

@@ -7,7 +7,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 import { history } from "./redux/history";
 
 import App from './App.jsx';
-import NewsLenta from './containers/NewsLenta/NewsLenta.jsx';
+// import NewsLenta from './containers/NewsLenta/NewsLenta.jsx';
 import Registration from './containers/Registration/RegistrationContainer.jsx';
 
 const MOUNT_NODE = document.getElementById('root');
@@ -18,7 +18,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path='/' component={App}/>
                 <Route path='/registration' component={Registration} />
-                <Route path='/news' component={NewsLenta} />
+                {/*<Route path='/news' component={NewsLenta} />*/}
             </Switch>
         </ConnectedRouter>
     </Provider>,
