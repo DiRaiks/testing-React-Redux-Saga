@@ -53,4 +53,8 @@ class Registration extends Component {
     }
 }
 
-export default connect()(Registration);
+const mapStateToProps = (state) => {
+    return {...state.registrationReducer};
+}
+
+export default connect(mapStateToProps)(Registration);
