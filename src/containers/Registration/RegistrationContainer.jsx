@@ -17,15 +17,14 @@ class Registration extends Component {
     };
 
     registrationHandler = () => {
-        const user = {
+        const newUser = {
             login: this.state.Login,
             password: this.state.Password,
             mail: this.state.Email
         };
         this.props.dispatch({
             type: actionTypes.REGISTRATION_USER,
-            login: this.state.Login,
-            password: this.state.Password
+            newUser
         })
     };
 

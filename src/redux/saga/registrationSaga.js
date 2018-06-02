@@ -3,41 +3,35 @@ import * as actionTypes from '../constants/actionTypes';
 // import axios from 'axios';
 import {users} from '../../db';
 
-function checkUser(login, password) {
-    console.log('checkUser')
-    let newUser = false;
+function checkUser(newUser) {
+    let succes = false;
     users.forEach(user => {
-        if (user.login === login) {
+        if (user.login === newUser.login) {
             throw new Error('user already exist')
         } else {
-            newUser = true;
+            users.push(newUser);
+            succes = true;
         }
     })
-    if (newUser) return true;
+    return succes;
 }
 
-function* authorizeFunc(login, password) {
-    console.log('authorize')
+function* authorizeFunc(newUser) {
     try {
-        const success = yield call(checkUser, login, password);
+        const success = yield call(checkUser, newUser);
         yield put({type: actionTypes.REGISTRATION_USER_SUCCESS});
         return success;
     } catch(error) {
-        yield put({type: actionTypes.REGISTRATION_USER_FAIL, error});
+        yield put({type: actionTypes.REGISTRATION_USER_FAIL, error: error.message});
     }
 }
 
 export function* watcherRegistrationSaga() {
     while (true) {
-        const {login, password} = yield take(actionTypes.REGISTRATION_USER);
-        console.log('-->>>>', login, password, authorizeFunc)
-        const authorize = yield call(authorizeFunc, login, password);
+        const {newUser} = yield take(actionTypes.REGISTRATION_USER);
+        const authorize = yield call(authorizeFunc, newUser);
         if (authorize) {
             yield take('LOGOUT')
         }
     }
 }
-
-
-
-
